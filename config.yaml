@@ -1,0 +1,47 @@
+paths:
+  data:
+    raw: "data/raw"
+    processed: "data/processed"
+    external: "data/external"
+  models: "models"
+  reports: "reports/figures"
+
+data:
+  tickers:
+    - "AAPL"
+    - "GOOGL"
+    - "MSFT"
+    - "TSLA"
+    - "^NSEI"
+  start_date: "2010-01-01"
+  end_date: "2024-01-01" # Or omit to get up to today
+  interval: "1d"
+
+features:
+  technical_indicators:
+    - "rsi"
+    - "macd"
+    - "bbands"
+    - "ema_20"
+    - "ema_50"
+    - "atr"
+    - "obv"
+
+model:
+  sequence_length: 60
+  prediction_horizons:
+    - 1
+    - 7
+  architecture:
+    lstm_units: [128, 64, 32]
+    dropout_rate: 0.2
+  training:
+    epochs: 30
+    batch_size: 64
+    learning_rate: 0.001
+    patience: 10
+    validation_split: 0.15
+    test_split: 0.15
+    scaler: "minmax" # or "standard"
+
+random_seed: 42
